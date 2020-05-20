@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ExampleActivity extends AppCompatActivity {
+import com.example.latte.activities.ProxyActivity;
+import com.example.latte.delegates.LatteDelegate;
+
+public class ExampleActivity extends ProxyActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public LatteDelegate setRootDelegate() {
+        return new ExampleDelegate();
     }
 }
