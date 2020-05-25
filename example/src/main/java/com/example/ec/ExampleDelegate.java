@@ -25,7 +25,8 @@ public class ExampleDelegate extends LatteDelegate {
 
     private void testRestClient(){
         RestClient.builder()
-                .url("http://127.0.0.01/index")
+                .url("http://192.168.1.103:8081/RestServer/api/user_profile.php")
+//                .url("https://www.baidu.com/")
                 .params("","")
                 .loader(getContext())
                 .success(new ISuccess() {

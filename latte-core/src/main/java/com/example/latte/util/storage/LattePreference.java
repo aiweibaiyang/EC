@@ -1,5 +1,6 @@
 package com.example.latte.util.storage;
 
+
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -66,7 +67,7 @@ public final class LattePreference {
 
     public static boolean getAppFlag(String key) {
         return getAppPreference()
-                .getBoolean(key, false);
+                .getBoolean(key,false);
     }
 
     public static void addCustomAppProfile(String key, String val) {
