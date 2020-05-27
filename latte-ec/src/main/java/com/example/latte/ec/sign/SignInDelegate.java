@@ -16,6 +16,8 @@ import com.example.latte.net.callback.IError;
 import com.example.latte.net.callback.IFailure;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.util.log.LatteLogger;
+import com.example.latte.wechat.LatteWeChat;
+import com.example.latte.wechat.callbacks.IWeChatSignInCallback;
 import com.google.android.material.textfield.TextInputEditText;
 
 import butterknife.BindView;
@@ -72,12 +74,12 @@ public class SignInDelegate extends LatteDelegate {
 
     @OnClick(R2.id.icon_sign_in_wechat)
     void onClickWeChat(){
-//        LatteWeChat.getInstance().onSignSuccess(new IWeChatSignInCallback() {
-//            @Override
-//            public void onSignInSuccess(String userInfo) {
-//
-//            }
-//        }).signIn();
+        LatteWeChat.getInstance().onSignSuccess(new IWeChatSignInCallback() {
+            @Override
+            public void onSignInSuccess(String userInfo) {
+
+            }
+        }).signIn();
     }
 
     @OnClick(R2.id.tv_link_sign_up)
