@@ -14,6 +14,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
+
     }
 
     buildTypes {
@@ -72,4 +73,17 @@ dependencies {
     // ----------------------微信-------------------------------------------------------------------
     //noinspection GradleDynamicVersion
     api 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    // ----------------------RecyclerView依赖-------------------------------------------------------
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+    // ----------------------RecyclerView分割线-----------------------------------------------------
+    api 'com.choices.divider:RecyclerView_Divider:1.0.0'
+    // ----------------------图片处理---------------------------------------------------------------
+    api 'com.github.bumptech.glide:glide:4.0.0-RC0'
+    api 'com.github.bumptech.glide:okhttp3-integration:4.0.0-RC0@aar'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0-RC0'
+    // ----------------------沉浸式状态栏StatusBar Before AndroidX 依赖 ----------------------------------------
+    api ('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
+
 }
