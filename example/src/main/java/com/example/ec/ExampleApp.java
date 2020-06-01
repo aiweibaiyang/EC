@@ -2,6 +2,7 @@ package com.example.ec;
 
 import android.app.Application;
 
+import com.example.ec.event.TestEvent;
 import com.example.latte.app.Latte;
 import com.example.latte.ec.database.DatabaseManager;
 import com.example.latte.ec.icon.FontEcModule;
@@ -20,6 +21,8 @@ public class ExampleApp extends Application {
                 .withInterceptor(new DebugInterceptor("test",R.raw.test))
                 .withWeChatAppId("")
                 .withWeChatAppSecret("")
+                .withJavascriptInterface("latte")
+                .withWebEvent("test",new TestEvent())
                 .configure();
         DatabaseManager.getInstance().init(this);
 
