@@ -5,15 +5,19 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ContentFrameLayout;
 
 import com.example.latte.R;
 import com.example.latte.delegates.LatteDelegate;
 
+import me.yokeyword.fragmentation.ExtraTransaction;
+import me.yokeyword.fragmentation.ISupportActivity;
 import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportActivityDelegate;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public abstract class ProxyActivity extends SupportActivity {
+public abstract class ProxyActivity extends AppCompatActivity implements ISupportActivity {
 
     private final SupportActivityDelegate DELEGATE = new SupportActivityDelegate(this);
 
@@ -40,5 +44,45 @@ public abstract class ProxyActivity extends SupportActivity {
         super.onDestroy();
         System.gc();
         System.runFinalization();
+    }
+
+    @Override
+    public SupportActivityDelegate getSupportDelegate() {
+        return DELEGATE;
+    }
+
+    @Override
+    public ExtraTransaction extraTransaction() {
+        return DELEGATE.extraTransaction();
+    }
+
+    @Override
+    public FragmentAnimator getFragmentAnimator() {
+        return DELEGATE.getFragmentAnimator();
+    }
+
+    @Override
+    public void setFragmentAnimator(FragmentAnimator fragmentAnimator) {
+        DELEGATE.setFragmentAnimator(fragmentAnimator);
+    }
+
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return DELEGATE.onCreateFragmentAnimator();
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+        DELEGATE.onBackPressedSupport();
+    }
+
+    @Override
+    public void onBackPressed() {
+        DELEGATE.onBackPressed();
+    }
+
+    @Override
+    public void post(Runnable runnable) {
+
     }
 }
