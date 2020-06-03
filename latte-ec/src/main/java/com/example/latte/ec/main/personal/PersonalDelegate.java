@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.latte.delegates.bottom.BottomItemDelegate;
 import com.example.latte.ec.R;
 import com.example.latte.ec.R2;
+import com.example.latte.ec.main.personal.address.AddressDelegate;
 import com.example.latte.ec.main.personal.list.ListAdapter;
 import com.example.latte.ec.main.personal.list.ListBean;
 import com.example.latte.ec.main.personal.list.ListItemType;
@@ -63,13 +64,15 @@ public class PersonalDelegate extends BottomItemDelegate {
         final ListBean address = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(1)
+                .setDelegate(new AddressDelegate())
                 .setText("收货地址")
                 .build();
 
         final ListBean system = new ListBean.Builder()
                 .setItemType(ListItemType.ITEM_NORMAL)
                 .setId(2)
-                .setText("系统地址")
+                .setDelegate(new AddressDelegate())
+                .setText("系统设置")
                 .build();
 
         final List<ListBean> data = new ArrayList<>();
@@ -81,6 +84,7 @@ public class PersonalDelegate extends BottomItemDelegate {
         mRvSettings.setLayoutManager(manager);
         final ListAdapter adapter = new ListAdapter(data);
         mRvSettings.setAdapter(adapter);
+        mRvSettings.addOnItemTouchListener(new PersonalClickListener(this));
     }
 
 }

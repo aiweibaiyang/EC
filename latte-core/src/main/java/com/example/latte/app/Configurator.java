@@ -5,15 +5,17 @@ import android.os.Handler;
 
 import androidx.annotation.NonNull;
 
+import com.blankj.utilcode.util.Utils;
 import com.example.latte.delegates.web.event.Event;
 import com.example.latte.delegates.web.event.EventManager;
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
+import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import butterknife.internal.Utils;
 import okhttp3.Interceptor;
 
 public class Configurator {
@@ -42,9 +44,9 @@ public class Configurator {
 
     public final void configure() {
         initIcons();
-//        Logger.addLogAdapter(new AndroidLogAdapter());
+        Logger.addLogAdapter(new AndroidLogAdapter());
         LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY.name(), true);
-//        Utils.init(Latte.getApplicationContext());
+        Utils.init(Latte.getApplicationContext());
     }
 
     public final Configurator withApiHost(String host) {

@@ -31,5 +31,11 @@
         android:networkSecurityConfig="@xml/network_config"
         tools:ignore="UnusedAttribute">
 
+        <!--图片剪裁Activity-->
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+
     </application>
 </manifest>
