@@ -22,7 +22,7 @@ public class ExampleApp extends Application {
     public void onCreate() {
         super.onCreate();
         Latte.init(this)
-                .withApiHost("http://192.168.1.103:8081/RestServer/api/")
+                .withApiHost("http://192.168.43.15:8081/RestServer/api/")
                 .withIcon(new FontAwesomeModule())
                 .withIcon(new FontEcModule())
                 .withInterceptor(new DebugInterceptor("test", R.raw.test))
