@@ -60,6 +60,15 @@
             android:layout_toRightOf="@id/img_order_comment"/>
 
     </RelativeLayout>
+    
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_order_comment"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@android:color/white"
+        android:gravity="top|left"
+        android:hint="写下评论"
+        android:padding="10dp" />
 
     <com.example.latte.ui.widget.AutoPhotoLayout
         android:id="@+id/custom_auto_photo_layout"
