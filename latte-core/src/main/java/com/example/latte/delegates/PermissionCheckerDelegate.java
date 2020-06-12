@@ -4,11 +4,13 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
+import com.example.latte.ui.scanner.ScannerDelegate;
 import com.example.latte.util.callback.CallbackManager;
 import com.example.latte.util.callback.CallbackType;
 import com.example.latte.util.callback.IGlobalCallback;
@@ -35,6 +37,16 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
     //这个是真正调用的方法
     public void startCameraWithCheck() {
         PermissionCheckerDelegatePermissionsDispatcher.startCameraWithCheck(this);
+    }
+
+    //扫描二维码（不直接使用）
+    @NeedsPermission(Manifest.permission.CAMERA)
+    void startScan(BaseDelegate delegate){
+        delegate.getSupportDelegate().startForResult(new ScannerDelegate(),RequestCodes.SCAN);
+    }
+
+    public void startScanWithCheck(BaseDelegate delegate){
+        PermissionCheckerDelegatePermissionsDispatcher.startScanWithCheck(this,delegate);
     }
 
     @OnPermissionDenied(Manifest.permission.CAMERA)
@@ -117,4 +129,5 @@ public abstract class PermissionCheckerDelegate extends BaseDelegate {
             }
         }
     }
+
 }

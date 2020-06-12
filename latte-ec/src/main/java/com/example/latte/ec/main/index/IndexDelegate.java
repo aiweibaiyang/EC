@@ -23,11 +23,15 @@ import com.example.latte.ui.recycler.BaseDecoration;
 import com.example.latte.ui.recycler.MultipleFields;
 import com.example.latte.ui.recycler.MultipleItemEntity;
 import com.example.latte.ui.refresh.RefreshHandler;
+import com.example.latte.util.callback.CallbackManager;
+import com.example.latte.util.callback.CallbackType;
+import com.example.latte.util.callback.IGlobalCallback;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class IndexDelegate extends BottomItemDelegate {
 
@@ -44,9 +48,21 @@ public class IndexDelegate extends BottomItemDelegate {
 
     private RefreshHandler mRefreshHandler = null;
 
+    @OnClick(R2.id.icon_index_scan)
+    void onClickScanQrCode(){
+        startScanWithCheck(this.getParentDelegate());
+    }
+
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         mRefreshHandler = RefreshHandler.create(mRefreshLayout,mRecyclerView,new IndexDataConverter());
+        CallbackManager.getInstance()
+                .addCallback(CallbackType.ON_SCAN, new IGlobalCallback<String>() {
+                    @Override
+                    public void executeCallback(@Nullable String args) {
+                        Toast.makeText(getContext(),args,Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
     private void initRefreshLayout() {
