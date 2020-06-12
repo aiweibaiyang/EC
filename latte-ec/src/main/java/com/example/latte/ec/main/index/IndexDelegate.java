@@ -17,6 +17,7 @@ import com.example.latte.delegates.bottom.BottomItemDelegate;
 import com.example.latte.ec.R;
 import com.example.latte.ec.R2;
 import com.example.latte.ec.main.EcBottomDelegate;
+import com.example.latte.ec.main.index.search.SearchDelegate;
 import com.example.latte.net.RestClient;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.ui.recycler.BaseDecoration;
@@ -33,7 +34,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class IndexDelegate extends BottomItemDelegate {
+public class IndexDelegate extends BottomItemDelegate implements View.OnFocusChangeListener {
 
     @BindView(R2.id.rv_index)
     RecyclerView mRecyclerView = null;
@@ -53,6 +54,8 @@ public class IndexDelegate extends BottomItemDelegate {
         startScanWithCheck(this.getParentDelegate());
     }
 
+
+
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         mRefreshHandler = RefreshHandler.create(mRefreshLayout,mRecyclerView,new IndexDataConverter());
@@ -63,6 +66,7 @@ public class IndexDelegate extends BottomItemDelegate {
                         Toast.makeText(getContext(),args,Toast.LENGTH_LONG).show();
                     }
                 });
+        mSearchView.setOnFocusChangeListener(this);
     }
 
     private void initRefreshLayout() {
@@ -95,4 +99,10 @@ public class IndexDelegate extends BottomItemDelegate {
         return R.layout.delegate_index;
     }
 
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (hasFocus){
+            getParentDelegate().getSupportDelegate().start(new SearchDelegate());
+        }
+    }
 }
