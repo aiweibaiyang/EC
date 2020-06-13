@@ -1,5 +1,6 @@
 package com.example.latte.ec.detail;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
@@ -36,7 +38,7 @@ import butterknife.BindView;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.OnOffsetChangedListener{
+public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.OnOffsetChangedListener {
 
     @BindView(R2.id.goods_detail_toolbar)
     Toolbar mToolbar = null;
@@ -64,7 +66,7 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
     private static final String ARG_GOODS_ID = "ARG_GOODS_ID";
     private int mGoodsId = -1;
 
-    public static GoodsDetailDelegate create(@NotNull int goodsId){
+    public static GoodsDetailDelegate create(@NotNull int goodsId) {
         final Bundle args = new Bundle();
         args.putInt(ARG_GOODS_ID, goodsId);
         final GoodsDetailDelegate delegate = new GoodsDetailDelegate();
@@ -92,7 +94,16 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
         mAppBar.addOnOffsetChangedListener(this);
         mCircleTextView.setCircleBackground(Color.RED);
         initData();
-//        initTabLayout();
+        initTabLayout();
+    }
+
+    private void initTabLayout() {
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        mTabLayout.setSelectedTabIndicatorColor
+                (ContextCompat.getColor(getContext(), R.color.app_main));
+        mTabLayout.setTabTextColors(ColorStateList.valueOf(Color.BLACK));
+        mTabLayout.setBackgroundColor(Color.WHITE);
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     private void initData() {
@@ -106,13 +117,19 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
                         final JSONObject data =
                                 JSON.parseObject(response).getJSONObject("data");
                         initBanner(data);
-//                        initGoodsInfo(data);
+                        initGoodsInfo(data);
 //                        initPager(data);
 //                        setShopCartCount(data);
                     }
                 })
                 .build()
                 .get();
+    }
+
+    private void initGoodsInfo(JSONObject data) {
+        final String goodsData = data.toJSONString();
+        getSupportDelegate().
+                loadRootFragment(R.id.frame_goods_info, GoodsInfoDelegate.create(goodsData));
     }
 
     private void initBanner(JSONObject data) {
