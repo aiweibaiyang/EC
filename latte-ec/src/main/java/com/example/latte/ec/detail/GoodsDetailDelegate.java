@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.ToxicBakery.viewpager.transforms.DefaultTransformer;
@@ -118,12 +119,17 @@ public class GoodsDetailDelegate extends LatteDelegate implements AppBarLayout.O
                                 JSON.parseObject(response).getJSONObject("data");
                         initBanner(data);
                         initGoodsInfo(data);
-//                        initPager(data);
+                        initPager(data);
 //                        setShopCartCount(data);
                     }
                 })
                 .build()
                 .get();
+    }
+
+    private void initPager(JSONObject data) {
+        final PagerAdapter adapter = new TabPagerAdapter(getFragmentManager(), data);
+        mViewPager.setAdapter(adapter);
     }
 
     private void initGoodsInfo(JSONObject data) {
