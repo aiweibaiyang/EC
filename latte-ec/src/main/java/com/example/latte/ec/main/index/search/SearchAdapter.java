@@ -20,14 +20,14 @@ public class SearchAdapter extends MultipleRecyclerAdapter {
     @Override
     protected void convert(MultipleViewHolder holder, MultipleItemEntity entity) {
         super.convert(holder, entity);
-        switch (entity.getItemType()){
+        switch (entity.getItemType()) {
             case SearchItemType.ITEM_SEARCH:
                 final AppCompatTextView tvSearchItem = holder.getView(R.id.tv_search_item);
                 final String history = entity.getFiled(MultipleFields.TEXT);
                 tvSearchItem.setText(history);
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
     }
 }

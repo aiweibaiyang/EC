@@ -54,8 +54,6 @@ public class IndexDelegate extends BottomItemDelegate implements View.OnFocusCha
         startScanWithCheck(this.getParentDelegate());
     }
 
-
-
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         mRefreshHandler = RefreshHandler.create(mRefreshLayout,mRecyclerView,new IndexDataConverter());

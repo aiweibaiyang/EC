@@ -35,7 +35,7 @@ public class SearchDelegate extends LatteDelegate {
     AppCompatEditText mSearchEdit = null;
 
     @OnClick(R2.id.tv_top_search)
-    void onCliclSearch() {
+    void onClickSearch() {
         RestClient.builder()
                 .url("search.php?key=")
                 .loader(getContext())
