@@ -8,6 +8,7 @@ import com.example.ec.event.TestEvent;
 import com.example.latte.app.Latte;
 import com.example.latte.ec.database.DatabaseManager;
 import com.example.latte.ec.icon.FontEcModule;
+import com.example.latte.net.interceptors.AddCookieInterceptor;
 import com.example.latte.net.interceptors.DebugInterceptor;
 import com.example.latte.util.callback.CallbackManager;
 import com.example.latte.util.callback.CallbackType;
@@ -30,6 +31,9 @@ public class ExampleApp extends Application {
                 .withWeChatAppSecret("")
                 .withJavascriptInterface("latte")
                 .withWebEvent("test", new TestEvent())
+                //添加cookie同步拦截器
+                .withWebHost("https://www.baidu.com/")
+                .withInterceptor(new AddCookieInterceptor())
                 .configure();
         DatabaseManager.getInstance().init(this);
         //开启极光推送

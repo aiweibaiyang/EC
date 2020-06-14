@@ -111,6 +111,12 @@ public class Configurator {
         return this;
     }
 
+    //浏览器加载的host
+    public Configurator withWebHost(String host) {
+        LATTE_CONFIGS.put(ConfigKeys.WEB_HOST, host);
+        return this;
+    }
+
     private void checkConfiguration() {
         final boolean isReady = (boolean) LATTE_CONFIGS.get(ConfigKeys.CONFIG_READY.name());
         if (!isReady) {
